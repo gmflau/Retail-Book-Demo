@@ -9,6 +9,7 @@ A special thank you to Matt Stump for helping put this together.
 #####Prerequisites 
 * Python 2.7+
 * [DataStax Python Driver](https://github.com/datastax/python-driver) 
+* >Note you may have to sudo apt-get install gcc 
 * [DataStax Enterprise 4.7.3 or greater](https://www.datastax.com/downloads) 
 
 #####How-to: 
