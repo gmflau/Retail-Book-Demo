@@ -182,7 +182,7 @@ def load_geo_data(session, geopath):
 if __name__ == '__main__':
     meta_path = 'metadata.json'
     geo_path = 'geodata.csv'
-    cluster = Cluster()
+    cluster = Cluster(['node0','node1','node2'])
     session = cluster.connect()
     session.execute(META_CF_DROP_STATEMENT)
     session.execute(RANK_CF_DROP_STATEMENT)
@@ -194,9 +194,9 @@ if __name__ == '__main__':
 
     meta_prepared = session.prepare(META_INSERT_STATEMENT)
     rank_prepared = session.prepare(RANK_INSERT_STATEMENT)
-
+    print ('loading geo')
     load_geo_data(session, geo_path)
-
+    print ('loading meta')
     for data in parse(meta_path):
         asin = data['asin']
         title = data.get('title', "")
