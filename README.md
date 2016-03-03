@@ -5,7 +5,7 @@ DataStax Azure Tech Day (Microsoft AMP Trainings)
 This is a simple git that'll help SE's get up and running for Microsoft/Azure based events
 ----------
 
-### Marc's **7** Steps to Success:
+### Chuck's **7** Steps to Success:
 
 1. **For ultimate convenience:** Hit the 'Easy Button' below
 
@@ -21,7 +21,7 @@ This is a simple git that'll help SE's get up and running for Microsoft/Azure ba
 
     >>Hint: `vi setup.sh` then paste the commands and run `chmod +x setup.sh` and finally `./setup.sh`
 
-7. Fork this git (which includes deck and instructions) and make it unique to the class (edit IP's, URL's ETC): https://github.com/Marcinthecloud/DataStaxDay
+7. Fork this git (which includes deck and instructions) and make it unique to the class (edit IP's, URL's ETC): https://github.com/chudro/DataStaxDay
 
     >>Note, all nodes now have public IP's so you'll have acces to DevCenter, Spark UI, and Solr UI
 
