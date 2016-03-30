@@ -10,14 +10,20 @@ A special thank you to Matt Stump for helping put this together.
 * Python 2.7+
 * [DataStax Python Driver](https://github.com/datastax/python-driver) 
 * >Note you may have to sudo apt-get install gcc 
+* >sudo apt-get install python-pip 
+* >sudo pip install cassandra-driver 
 * [DataStax Enterprise 4.7.3 or greater](https://www.datastax.com/downloads) 
 
 #####How-to: 
 1. Start DataStax Enterprise in search mode
   * ```for tarball installs: bin/dse cassandra -s```
   * ```for package installs: set SOLR=1 in the dse.default file and run: service dse start```
-2. Run solr_dataloader.py
+2. Run solr_dataloader.py ( >python solr_dataloader.py)
   * This will create the CQL schemas and load the data 
+  * Change in solr_dataloader.py:
+   *     cluster = Cluster(['node0','node1','node2'])
+   * to the names of the nodes in your cluster, for example:
+   *     cluster = Cluster(['dc0vm0','dc0vm1','dc0vm2','dc0vm3','dc0vm4'])
 3. Run create_core.sh 
   * This will generate Solr cores and index the data
 4. Go wild! 
