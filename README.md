@@ -1,6 +1,6 @@
 ![icon](http://i.imgur.com/1FUktQk.jpg)
 
-DataStax Azure Retail Event (Microsoft AMP Trainings)
+[DataStax Azure Retail Event](https://www.eventbrite.com/e/hands-on-retail-experienceworkshop-tour-with-microsoft-azure-datastax-tickets-24411945787)
 ===================
 ![icon](http://i.imgur.com/FoIOBlt.png)
 
