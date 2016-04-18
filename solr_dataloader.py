@@ -15,7 +15,7 @@ from datetime import date, timedelta, datetime
 
 from cassandra.cluster import Cluster
 
-KEYSPACE = "amazon"
+KEYSPACE = "retailer"
 META_COLUMN_FAMILY = "metadata"
 RANK_COLUMN_FAMILY = "rank"
 GEO_COLUMN_FAMILY = "clicks"
