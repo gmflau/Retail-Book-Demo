@@ -259,14 +259,14 @@ SELECT * FROM <keyspace>.sales WHERE solr_query='{"q":"name:chuck", "fq":"item:*
 > For your reference, [here's the doc](http://docs.datastax.com/en/datastax_enterprise/4.8/datastax_enterprise/srch/srchCql.html?scroll=srchCQL__srchSolrTokenExp) that shows some of things you can do
 
 OK! Time to work with some more interesting data. Meet Amazon book sales data:
->Note: This data is already in the DB, if you want to try it at home, [CLICK ME](http://github.com/chudro/Solr-Amazon-Book-Demo)
+>Note: This data is already in the DB, if you want to try it at home, [CLICK ME](https://github.com/chudro/Retail-Book-Demo)
 
 Click stream data:
 ```
 
-CREATE KEYSPACE amazon WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3 };
+CREATE KEYSPACE retailer WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3 };
 
-CREATE TABLE amazon.clicks (
+CREATE TABLE retailer.clicks (
     asin text,
     seq timeuuid,
     user uuid,
@@ -288,7 +288,7 @@ CREATE TABLE amazon.clicks (
 And book metadata: 
 
 ```
-CREATE TABLE amazon.metadata (
+CREATE TABLE retailer.metadata (
     asin text PRIMARY KEY,
     also_bought set<text>,
     buy_after_viewing set<text>,
@@ -309,9 +309,9 @@ Setup the Amazon Dataset
 
 ```sudo apt-get install git```
 
-```git clone https://github.com/Marcinthecloud/Solr-Amazon-Book-Demo.git```
+```git clone https://github.com/chudro/Retail-Book-Demo.git```
 
-```cd Solr-Amazon-Book-Demo/```
+```cd Retail-Book-Demo/```
 
 Edit the loader 
 > run ‘ifconfig’ and look to see what your 10.0.0.x address is
@@ -335,30 +335,30 @@ sudo python solr_dataloader.py
 ./create_core.sh
 ```
 
-> Example page of what's in the DB http://www.amazon.com/Science-Closer-Look-Grade-6/dp/0022841393/ref=sr_1_1?ie=UTF8&qid=1454964627&sr=8-1&keywords=0022841393
+> Example page of what's in the [DB] (http://www.amazon.com/Science-Closer-Look-Grade-6/dp/0022841393/ref=sr_1_1?ie=UTF8&qid=1454964627&sr=8-1&keywords=0022841393)
 
 So what are things you can do? 
 >Filter queries: These are awesome because the result set gets cached in memory. 
 ```
-SELECT * FROM amazon.metadata WHERE solr_query='{"q":"title:Noir~", "fq":"categories:Books", "sort":"title asc"}' limit 10; 
+SELECT * FROM retailer.metadata WHERE solr_query='{"q":"title:Noir~", "fq":"categories:Books", "sort":"title asc"}' limit 10; 
 ```
 > Faceting: Get counts of fields 
 ```
-SELECT * FROM amazon.metadata WHERE solr_query='{"q":"title:Noir~", "facet":{"field":"categories"}}' limit 10; 
+SELECT * FROM retailer.metadata WHERE solr_query='{"q":"title:Noir~", "facet":{"field":"categories"}}' limit 10; 
 ```
 > Geospatial Searches: Supports box and radius
 ```
-SELECT * FROM amazon.clicks WHERE solr_query='{"q":"asin:*", "fq":"+{!geofilt pt=\"37.7484,-122.4156\" sfield=location d=1}"}' limit 10; 
+SELECT * FROM retailer.clicks WHERE solr_query='{"q":"asin:*", "fq":"+{!geofilt pt=\"37.7484,-122.4156\" sfield=location d=1}"}' limit 10; 
 ```
 For more info, check out https://cwiki.apache.org/confluence/display/solr/Spatial+Search
 
 > Joins: Not your relational joins. These queries 'borrow' indexes from other tables to add filter logic. These are fast! 
 ```
-SELECT * FROM amazon.metadata WHERE solr_query='{"q":"*:*", "fq":"{!join from=asin to=asin force=true fromIndex=amazon.clicks}area_code:415"}' limit 5; 
+SELECT * FROM retailer.metadata WHERE solr_query='{"q":"*:*", "fq":"{!join from=asin to=asin force=true fromIndex=amazon.clicks}area_code:415"}' limit 5; 
 ```
 > Fun all in one. 
 ```
-SELECT * FROM amazon.metadata WHERE solr_query='{"q":"*:*", "facet":{"field":"categories"}, "fq":"{!join from=asin to=asin force=true fromIndex=amazon.clicks}area_code:415"}' limit 5;
+SELECT * FROM retailer.metadata WHERE solr_query='{"q":"*:*", "facet":{"field":"categories"}, "fq":"{!join from=asin to=asin force=true fromIndex=amazon.clicks}area_code:415"}' limit 5;
 ```
 Want to see a really cool example of a live DSE Search app? Check out [KillrVideo](http://www.killrvideo.com/) and its [Git](https://github.com/luketillman/killrvideo-csharp) to see it in action. 
 
