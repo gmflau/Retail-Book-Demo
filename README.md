@@ -1,8 +1,10 @@
+![icon](http://i.imgur.com/1FUktQk.jpg)
+
 DataStax Azure Retail Event (Microsoft AMP Trainings)
 ===================
 ![icon](http://i.imgur.com/FoIOBlt.png)
 
-This is a simple git that'll help SE's get up and running for Microsoft/Azure based events
+This is a simple git that'll help you get up and running on Microsoft/Azure with DSE!
 ----------
 
 ### Chuck's **7** Steps to Success:
@@ -40,7 +42,7 @@ You will login with:
 
 
 
-Welcome to Universal Store DataStax Hands On Lunch & Learn
+Welcome to Microsoft/DataStax Retail Event!!!
 ===================
 ![icon](http://i.imgur.com/FoIOBlt.png)
 
